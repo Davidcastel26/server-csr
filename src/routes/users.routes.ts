@@ -1,11 +1,22 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
+
 import { validateAreas } from '../middleware/validations';
-import { getAllUser } from '../controllers/main/users.controller';
+// controllers
+import { getAllUser,
+         getUser, } from '../controllers/main/users.controller';
+// check with helpers validations 
+import { userIdExist } from '../helpers/validations/userCheck';
 
 
 const router = Router();
 
-router.get('/', getAllUser )
+router.get('/', getAllUser );
+
+router.get('/:idUser',[
+    check('idUser').custom( userIdExist ),
+    validateAreas
+], getUser)
+
 
 export default router;
