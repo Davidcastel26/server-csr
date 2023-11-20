@@ -1,6 +1,7 @@
 export enum UserPaths {
     auth =  '/csr/auth',
-    users = '/csr/users'
+    users = '/csr/users',
+    roles = '/csr/roles'
 }
 
 export enum ProductPaths {

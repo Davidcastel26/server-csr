@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  idUser      String @unique @default(uuid())
+  cxId        String @unique @default(cuid())
+  userName    String @unique @db.VarChar(25)
+  email       String @unique @db.VarChar(45)
+  password    String @db.VarChar(75)
+  img         String?
+  google      Boolean @default(false)
+  isActive    Boolean @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  roleId      String
+  role        Roles @relation("RoleToUser", fields: [roleId], references: [idRole])
+  
+  @@map("users")
+  @@id([idUser, cxId])
+  @@index([roleId])
+}
+
+model Roles{
+  idRole         String @unique @default(uuid())
+  roleName       String @unique
+  createAt       DateTime @default(now())
+  updateAt       DateTime @updatedAt
+  users          Users[] @relation("RoleToUser")
+
+  @@map("roles")
+  @@id([idRole])
+}
+
+model Products {
+  idProduct       String @unique @id @default(uuid())
+  nameProduct     String @unique
+  price           Int @default(0)
+  createdAt       DateTime @default(now())
+  isActive        Boolean @default(true)
+  imgMainProduct  String?
+  imgs            Imgs[] @relation("ImgsToUser")
+
+
+  @@map("products")
+}
+
+model Imgs {
+  idImg     String @unique @id @default(uuid())
+  productId String
+  img       String @db.VarChar(255)
+  createAt  DateTime @default(now())
+  updateAt  DateTime @updatedAt
+  product   Products @relation("ImgsToUser", fields: [productId], references: [idProduct])
+}

@@ -16,3 +16,9 @@ Dev dependencies
 ```
 npm i -D @types/cors @types/express @types/node @types/uuid prisma ts-node ts-node-dev typescript @types/bcryptjs @types/express-session @types/swagger-jsdoc @types/swagger-ui-express
 ```
+
+## to run redis
+```
+redis-server
+```
+if you need to set a port just run -p + port number

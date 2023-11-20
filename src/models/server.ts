@@ -8,6 +8,7 @@ import swaggerUi from 'swagger-ui-express';
 import { corsConfig, swaggerOptions } from '../configs';
 import { sessionMiddleware } from '../middleware/serverSession/session';
 import { UserPaths } from '../ts/enums/emainPaths';
+import { userRoute } from '../routes';
 
 dotenv.config();
 
@@ -19,9 +20,8 @@ app.use( helmet() );
 app.use( cors(corsConfig) );
 app.use( express.json() );
 app.use( sessionMiddleware );
-// app.use( productPaths.pokemon, pokemonsRouter  )
-// app.use( productPaths.types, typesRouter  )
-app.use( UserPaths.users )
+
+app.use( UserPaths.users, userRoute );
 
 const spacs = swaggerJsdoc( swaggerOptions );
 
