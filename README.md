@@ -9,7 +9,7 @@ use the package manager npm to install.
 Dependencies
 
 ```
-npm i uuidv4 express-validator express dotenv cors axios @prisma/client bcryptjs google-auth-library jsonwebtoken mixpanel swagger-jsdoc swagger-ui-express
+npm i uuidv4 express-validator express dotenv cors axios @prisma/client bcryptjs google-auth-library jsonwebtoken mixpanel swagger-jsdoc swagger-ui-express socket.io
 ```
 
 Dev dependencies
