@@ -11,7 +11,7 @@ export const getUser = async(
 
     try {
 
-        const getUser = prismadb.users.findUnique({
+        const getUser = await prismadb.users.findUnique({
             where:{
                 idUser: idUser
             },
@@ -19,7 +19,7 @@ export const getUser = async(
                 role:true
             }
         })
-
+        
         return res.status(200).json(getUser);
 
     } catch(error){
