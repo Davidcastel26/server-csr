@@ -19,14 +19,11 @@ export const createProduct = async(
             imgMainProduct
         }
 
-        if( postProduct.nameProduct === undefined) return;
-        if( postProduct.desc === undefined) return;
-
         await prismadb.products.create({
             data:{
-                nameProduct: postProduct.nameProduct,
+                nameProduct: postProduct.nameProduct!,
                 numProduct: postProduct.numProduct,
-                desc: postProduct.desc,
+                desc: postProduct.desc!,
                 imgMainProduct: postProduct.imgMainProduct
             }
         })
