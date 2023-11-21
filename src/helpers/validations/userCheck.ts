@@ -7,6 +7,6 @@ export const userIdExist = async (idUser :string) => {
         where: { idUser }
     })
 
-    if(!idUser) throw new Error(`user id ${idUser} not valid`)
+    if(!idExist) throw new Error(`user id ${idUser} not valid`)
 
 }

@@ -29,7 +29,8 @@ CREATE TABLE "roles" (
 CREATE TABLE "products" (
     "idProduct" TEXT NOT NULL,
     "nameProduct" TEXT NOT NULL,
-    "price" INTEGER NOT NULL DEFAULT 0,
+    "numProduct" INTEGER NOT NULL DEFAULT 0,
+    "desc" VARCHAR(180) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "isActive" BOOLEAN NOT NULL DEFAULT true,
     "imgMainProduct" TEXT,
@@ -38,14 +39,30 @@ CREATE TABLE "products" (
 );
 
 -- CreateTable
-CREATE TABLE "Imgs" (
+CREATE TABLE "imgs" (
     "idImg" TEXT NOT NULL,
     "productId" TEXT NOT NULL,
     "img" VARCHAR(255) NOT NULL,
     "createAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updateAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "Imgs_pkey" PRIMARY KEY ("idImg")
+    CONSTRAINT "imgs_pkey" PRIMARY KEY ("idImg")
+);
+
+-- CreateTable
+CREATE TABLE "productdetail" (
+    "idProductDetail" TEXT NOT NULL,
+    "productId" TEXT NOT NULL,
+    "price" INTEGER NOT NULL DEFAULT 0,
+    "fullDesc" TEXT NOT NULL,
+    "numGuest" INTEGER NOT NULL DEFAULT 0,
+    "beds" INTEGER NOT NULL DEFAULT 0,
+    "rooms" INTEGER NOT NULL DEFAULT 0,
+    "bath" INTEGER NOT NULL DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+
+    CONSTRAINT "productdetail_pkey" PRIMARY KEY ("idProductDetail")
 );
 
 -- CreateIndex
@@ -76,10 +93,22 @@ CREATE UNIQUE INDEX "products_idProduct_key" ON "products"("idProduct");
 CREATE UNIQUE INDEX "products_nameProduct_key" ON "products"("nameProduct");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Imgs_idImg_key" ON "Imgs"("idImg");
+CREATE UNIQUE INDEX "imgs_idImg_key" ON "imgs"("idImg");
+
+-- CreateIndex
+CREATE INDEX "imgs_productId_idx" ON "imgs"("productId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "productdetail_idProductDetail_key" ON "productdetail"("idProductDetail");
+
+-- CreateIndex
+CREATE INDEX "productdetail_productId_idx" ON "productdetail"("productId");
 
 -- AddForeignKey
 ALTER TABLE "users" ADD CONSTRAINT "users_roleId_fkey" FOREIGN KEY ("roleId") REFERENCES "roles"("idRole") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Imgs" ADD CONSTRAINT "Imgs_productId_fkey" FOREIGN KEY ("productId") REFERENCES "products"("idProduct") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "imgs" ADD CONSTRAINT "imgs_productId_fkey" FOREIGN KEY ("productId") REFERENCES "products"("idProduct") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "productdetail" ADD CONSTRAINT "productdetail_productId_fkey" FOREIGN KEY ("productId") REFERENCES "products"("idProduct") ON DELETE RESTRICT ON UPDATE CASCADE;

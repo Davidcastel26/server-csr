@@ -43,12 +43,13 @@ model Roles{
 model Products {
   idProduct       String @unique @id @default(uuid())
   nameProduct     String @unique
-  price           Int @default(0)
+  numProduct      Int @default(0)
+  desc            String @db.VarChar(180)
   createdAt       DateTime @default(now())
   isActive        Boolean @default(true)
   imgMainProduct  String?
-  imgs            Imgs[] @relation("ImgsToUser")
-
+  imgs            Imgs[] @relation("ImgsToProduct")
+  productDetail   ProductDetail[] @relation("DetailToProduct")
 
   @@map("products")
 }
@@ -59,5 +60,25 @@ model Imgs {
   img       String @db.VarChar(255)
   createAt  DateTime @default(now())
   updateAt  DateTime @updatedAt
-  product   Products @relation("ImgsToUser", fields: [productId], references: [idProduct])
+  product   Products @relation("ImgsToProduct", fields: [productId], references: [idProduct])
+
+  @@map("imgs")
+  @@index([productId])
+}
+
+model ProductDetail {
+  idProductDetail String @unique @id @default(uuid())
+  productId       String
+  price           Int @default(0)
+  fullDesc        String @db.Text
+  numGuest        Int @default(0)
+  beds            Int @default(0)
+  rooms           Int @default(0)
+  bath            Int @default(0)
+  createdAt       DateTime @default(now())
+  isActive        Boolean @default(true)
+  product         Products @relation("DetailToProduct", fields: [productId], references: [idProduct])
+
+  @@map("productdetail")
+  @@index([productId])
 }

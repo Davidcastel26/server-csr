@@ -7,8 +7,8 @@ import swaggerUi from 'swagger-ui-express';
 
 import { corsConfig, swaggerOptions } from '../configs';
 import { sessionMiddleware } from '../middleware/serverSession/session';
-import { UserPaths } from '../ts/enums/emainPaths';
-import { userRoute } from '../routes';
+import { ProductPaths, UserPaths } from '../ts/enums/emainPaths';
+import { productRoute, userRoute } from '../routes';
 
 dotenv.config();
 
@@ -22,6 +22,7 @@ app.use( express.json() );
 app.use( sessionMiddleware );
 
 app.use( UserPaths.users, userRoute );
+app.use( ProductPaths.products, productRoute )
 
 const spacs = swaggerJsdoc( swaggerOptions );
 

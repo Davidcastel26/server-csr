@@ -1,11 +1,9 @@
-// import roleRoute  from './roles.routes';
-// import authRoute from './login.routes';
 import userRoute from './users.routes';
-// import todoRoute from './todos.routes'
+import productRoute from './products.routes';
 
 export { 
     // roleRoute, 
     // authRoute,
-    // todoRoute,
+    productRoute,
     userRoute
 }
