@@ -9,9 +9,10 @@ import swaggerUi from 'swagger-ui-express';
 import { corsConfig, swaggerOptions } from '../configs';
 import { sessionMiddleware } from '../middleware/serverSession/session';
 // path 
-import { ProductPaths, UserPaths } from '../ts/enums/emainPaths';
+// import { ProductPaths, UserPaths } from '../ts/enums/emainPaths';
 // routes 
 import { productRoute, userRoute } from '../routes';
+import { documentationPath, ProductPaths, UserPaths  } from '../ts';
 
 dotenv.config();
 
@@ -29,7 +30,7 @@ app.use( ProductPaths.products, productRoute )
 
 const spacs = swaggerJsdoc( swaggerOptions );
 
-app.use('/api-docs', 
+app.use(documentationPath.doc, 
     swaggerUi.serve,
     swaggerUi.setup(spacs) 
 )
