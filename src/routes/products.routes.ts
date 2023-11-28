@@ -72,6 +72,31 @@ router.get('/', [
     validateAreas
 ], getAllProducts);
 
+/**
+ * @swagger
+ * /csr/products/{id}:
+ *  get:
+ *      summary: return a Product
+ *      tags: [Product]
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            schema:
+ *              type: string
+ *            required: true
+ *            description: the product id
+ *      responses:
+ *          200:
+ *              description: A product.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                         type: object
+ *                         $ref: '#/components/schemas/Product'
+ *      404:
+ *          description: product not found
+ */
+
 router.get('/:idProduct', [
     check('idProduct').custom( productIdExist ),
     check('isActive').custom( activeProductTrue ),
@@ -108,5 +133,60 @@ router.post('/', [
     check('nameProduct').custom(productName),
     validateAreas,
 ], createProduct)
+
+/**
+ * @swagger
+ * /csr/products/{id}:
+ *  delete:
+ *      summary: delete a Product
+ *      tags: [Product]
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            schema:
+ *              type: string
+ *            required: true
+ *            description: the product id
+ *      responses:
+ *          200:
+ *              description: product deleted.
+ *          404:
+ *              description: product not found.
+ */
+router.delete('/idProduct',()=>{})
+
+/**
+ * @swagger
+ * /csr/products/{id}:
+ *  put:
+ *      summary: update a Product
+ *      tags: [Product]
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            schema:
+ *              type: string
+ *            required: true
+ *            description: the product id
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      $ref: '#/components/schemas/Product'
+ *      responses:
+ *          200:
+ *              description: A product updated.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                         type: object
+ *                         $ref: '#/components/schemas/Product'
+ *          404:
+ *              description: product not found
+ */
+
+router.put('/idProduct',()=>{})
 
 export default router;
