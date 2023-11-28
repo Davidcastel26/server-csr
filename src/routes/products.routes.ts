@@ -46,7 +46,12 @@ import {
  * 
  */    
 
-
+/**
+ * @swagger
+ * tags:
+ *   name: Products
+ *   description: The products managing API
+ */
 
 const router = Router();
 
@@ -54,8 +59,8 @@ const router = Router();
  * @swagger
  * /csr/products:
  *  get:
- *      summary: return all Products
- *      tags: [Product]
+ *      summary: Returns the lsit of all products
+ *      tags: [Products]
  *      responses:
  *          200:
  *              description: All products here.
@@ -77,7 +82,7 @@ router.get('/', [
  * /csr/products/{id}:
  *  get:
  *      summary: return a Product
- *      tags: [Product]
+ *      tags: [Products]
  *      parameters:
  *          - in: path
  *            name: id
@@ -108,7 +113,7 @@ router.get('/:idProduct', [
  * /csr/products:
  *  post:
  *      summary: create a new Product
- *      tags: [Product]
+ *      tags: [Products]
  *      requestBody:
  *          required: true
  *          content:
@@ -139,7 +144,7 @@ router.post('/', [
  * /csr/products/{id}:
  *  delete:
  *      summary: delete a Product
- *      tags: [Product]
+ *      tags: [Products]
  *      parameters:
  *          - in: path
  *            name: id
@@ -160,7 +165,7 @@ router.delete('/idProduct',()=>{})
  * /csr/products/{id}:
  *  put:
  *      summary: update a Product
- *      tags: [Product]
+ *      tags: [Products]
  *      parameters:
  *          - in: path
  *            name: id
