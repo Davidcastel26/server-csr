@@ -14,20 +14,6 @@ import {
         productIdExist, 
         productName, } from '../helpers/validations/productCheck';
 
-
-const router = Router();
-
-router.get('/', [
-    check('isActive').custom( activeProductTrue ),
-    validateAreas
-], getAllProducts);
-
-router.get('/:idProduct', [
-    check('idProduct').custom( productIdExist ),
-    check('isActive').custom( activeProductTrue ),
-    validateAreas
-], getProduct );
-
 /**
  * @swagger
  * components:
@@ -59,6 +45,56 @@ router.get('/:idProduct', [
  *              imgMainProduct: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8Gts4dqBBLIv13MFUKj-Fr6dqDs1U1O7yksdv_kc&s
  * 
  */    
+
+
+
+const router = Router();
+
+/**
+ * @swagger
+ * /csr/products:
+ *  get:
+ *      summary: return all Products
+ *      tags: [Product]
+ *      responses:
+ *          200:
+ *              description: All products here.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                         type: array
+ *                         items:
+ *                           $ref: '#/components/schemas/Product'
+ */
+
+router.get('/', [
+    check('isActive').custom( activeProductTrue ),
+    validateAreas
+], getAllProducts);
+
+router.get('/:idProduct', [
+    check('idProduct').custom( productIdExist ),
+    check('isActive').custom( activeProductTrue ),
+    validateAreas
+], getProduct );
+
+/**
+ * @swagger
+ * /csr/products:
+ *  post:
+ *      summary: create a new Product
+ *      tags: [Product]
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      $ref: '#/components/schemas/Product'
+ *      responses:
+ *          201:
+ *              description: new user created!
+ */
 
 router.post('/', [
     check('nameProduct','Name is a must for product').not().isEmpty(),

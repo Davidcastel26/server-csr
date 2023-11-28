@@ -6,7 +6,7 @@ export const swaggerOptions: sOptions = {
     definition:{
      openapi:"3.0.0",
      info:{
-        title: "Portfolio API",
+        title: "CSR API",
         version: "1.0.0",
         description:"This is an api where hostes could show their listings",
         contact:{
