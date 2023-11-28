@@ -120,7 +120,11 @@ export const getAllProducts = async(
     
     try {
         
-        const allProducts = await prismadb.products.findMany()
+        const allProducts = await prismadb.products.findMany({
+          include:{
+            productDetail: true
+          }
+        })
 
         return res.status(200).json(allProducts)
         

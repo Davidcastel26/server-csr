@@ -11,6 +11,17 @@ import { userIdExist } from '../helpers/validations/userCheck';
 
 const router = Router();
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *      User:
+ *          type: object
+ *          properties:
+ *              name:
+ *                 type: string
+ *                 description: the user name
+ */             
 router.get('/', getAllUser );
 
 router.get('/:idUser',[
